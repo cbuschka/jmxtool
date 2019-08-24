@@ -16,7 +16,7 @@ public class ListAttributesCommand implements Command
 	@Override
 	public String getDescription()
 	{
-		return "List MBeans.";
+		return "List attributes.";
 	}
 
 	public void execute(CommandLine commandLine) throws Exception
