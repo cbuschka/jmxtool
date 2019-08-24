@@ -8,6 +8,12 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig
 {
 	@Bean
+	public TailCommand tailCommand()
+	{
+		return new TailCommand();
+	}
+
+	@Bean
 	public MBeanServerConnectionPool mBeanConnectionPool()
 	{
 		return new MBeanServerConnectionPool();

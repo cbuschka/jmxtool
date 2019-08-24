@@ -27,6 +27,6 @@ public class GetAttributeCommand implements Command
 		MBeanServerConnection jmxConn = mBeanServerConnectionPool.getConnection(serviceUrl, user, password);
 		ObjectName jmxObjectName = new ObjectName(objectName);
 		Object value = jmxConn.getAttribute(jmxObjectName, attributeName);
-		System.out.print(value);
+		System.out.print(String.format("%s:%s=%s", objectName, attributeName, value));
 	}
 }

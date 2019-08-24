@@ -23,6 +23,8 @@ public class CommandRegistry
 	private ListMBeansCommand listMBeansCommand;
 	@Autowired
 	private ListAttributesCommand listAttributesCommand;
+	@Autowired
+	private TailCommand tailCommand;
 
 	@PostConstruct
 	private void init()
@@ -31,6 +33,7 @@ public class CommandRegistry
 		commandMap.put("listMBeans", listMBeansCommand);
 		commandMap.put("listAttributes", listAttributesCommand);
 		commandMap.put("getAttribute", getAttributeCommand);
+		commandMap.put("tail", tailCommand);
 		commandMap.put("version", versionCommand);
 	}
 

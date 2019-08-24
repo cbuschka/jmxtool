@@ -47,4 +47,10 @@ public class CommandLine
 	{
 		return (String) this.opts.getOrDefault(key, defaultValue);
 	}
+
+	public int getIntOpt(String key, int defaultValue)
+	{
+		String value = getOpt(key, String.valueOf(defaultValue));
+		return Integer.parseInt(value);
+	}
 }
