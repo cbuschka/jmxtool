@@ -20,4 +20,4 @@ jmxtool help
 Written 2019 by [Cornelius Buschka](https://github.com/cbuschka).
 
 ## License
-[MIT](./license.txt)
+[Apache License, Version 2.0](./license.txt)
