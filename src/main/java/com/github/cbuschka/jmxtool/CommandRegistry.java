@@ -23,6 +23,7 @@ public class CommandRegistry
 	{
 		commandMap.put("help", helpCommand);
 		commandMap.put("listMBeans", new ListMBeansCommand());
+		commandMap.put("listAttributes", new ListAttributesCommand());
 		commandMap.put("getAttribute", new GetAttributeCommand());
 		commandMap.put("version", versionCommand);
 	}
