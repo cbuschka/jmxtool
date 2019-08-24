@@ -3,9 +3,10 @@
 ## Usage
 
 ```bash
-jmxtool get \
-	--service-url=service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi \
-	--object-name=Catalina:type=Manager,context=/,host=localhost \
+jmxtool getAttribute \
+	--user=me --password=secret \
+	--serviceUrl=service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi \
+	--objectName=Catalina:type=Manager,context=/,host=localhost \
 	--attributeName=activeSessions
 ```
 
