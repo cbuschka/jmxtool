@@ -8,6 +8,16 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig
 {
 	@Bean
+	public DefaultOutputWriter defaultOutputWriter() {
+		return new DefaultOutputWriter();
+	}
+
+	@Bean
+	public OutputWriterProvider outputWriterProvider() {
+		return new OutputWriterProvider();
+	}
+
+	@Bean
 	public TailCommand tailCommand()
 	{
 		return new TailCommand();

@@ -9,6 +9,8 @@ import java.util.Date;
 public class GetAttributeCommand implements Command
 {
 	@Autowired
+	private OutputWriterProvider outputWriterProvider;
+	@Autowired
 	private MBeanServerConnectionPool mBeanServerConnectionPool;
 
 	@Override
@@ -19,7 +21,7 @@ public class GetAttributeCommand implements Command
 
 	public void execute(CommandLine commandLine) throws Exception
 	{
-		OutputWriter outputWriter = new DefaultOutputWriter();
+		OutputWriter outputWriter = this.outputWriterProvider.getOutputWriter();
 		String serviceUrl = commandLine.getRequiredOpt("serviceUrl");
 		String objectName = commandLine.getRequiredOpt("objectName");
 		String attributeName = commandLine.getRequiredOpt("attributeName");

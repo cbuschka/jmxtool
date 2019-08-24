@@ -12,6 +12,8 @@ import java.util.List;
 public class TailCommand implements Command
 {
 	@Autowired
+	private OutputWriterProvider outputWriterProvider;
+	@Autowired
 	private MBeanServerConnectionPool mBeanServerConnectionPool;
 
 	@Override
@@ -23,7 +25,7 @@ public class TailCommand implements Command
 	@Override
 	public void execute(CommandLine commandLine) throws Exception
 	{
-		OutputWriter outputWriter = new DefaultOutputWriter();
+		OutputWriter outputWriter = this.outputWriterProvider.getOutputWriter();
 		String serviceUrl = commandLine.getRequiredOpt("serviceUrl");
 		String user = commandLine.getOpt("user");
 		String password = commandLine.getOpt("password");
