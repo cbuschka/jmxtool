@@ -6,11 +6,11 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
-public class GetCommand
+public class GetAttributeCommand
 {
 	private CommandLine commandLine;
 
-	public GetCommand(CommandLine commandLine)
+	public GetAttributeCommand(CommandLine commandLine)
 	{
 		this.commandLine = commandLine;
 	}
@@ -18,14 +18,14 @@ public class GetCommand
 	public void execute() throws Exception
 	{
 
-		if (!this.commandLine.getCommand().equals("get"))
+		if (!this.commandLine.getCommand().equals("getAttribute"))
 		{
-			throw new IllegalArgumentException("Command must be get.");
+			throw new IllegalArgumentException("Command must be getAttribute.");
 		}
 
-		String serviceUrl = this.commandLine.getRequiredOpt("service-url");
-		String objectName = this.commandLine.getRequiredOpt("object-name");
-		String attributeName = this.commandLine.getRequiredOpt("attribute-name");
+		String serviceUrl = this.commandLine.getRequiredOpt("serviceUrl");
+		String objectName = this.commandLine.getRequiredOpt("objectName");
+		String attributeName = this.commandLine.getRequiredOpt("attributeName");
 
 		JMXServiceURL jmxServiceUrl = new JMXServiceURL(serviceUrl);
 		ObjectName jmxObjectName = new ObjectName(objectName);

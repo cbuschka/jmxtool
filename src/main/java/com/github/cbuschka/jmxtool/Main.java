@@ -12,7 +12,7 @@ public class Main
 	{
 		if (args.length == 0)
 		{
-			System.err.println("java -jar jmxtool.jar get --service-url=service-url --object-name=domain:key=value,key2=vallue --attributeName=aKey");
+			System.err.println("java -jar jmxtool.jar getAttribute --serviceUrl=service-url --objectName=domain:key=value,key2=value --attributeName=aKey");
 			System.exit(1);
 		}
 
@@ -27,8 +27,8 @@ public class Main
 
 			CommandLine commandLine = commandLineParser.parse(args, props);
 
-			GetCommand getCommand = new GetCommand(commandLine);
-			getCommand.execute();
+			GetAttributeCommand getAttributeCommand = new GetAttributeCommand(commandLine);
+			getAttributeCommand.execute();
 		}
 		catch (InvalidCommandLine ex)
 		{
