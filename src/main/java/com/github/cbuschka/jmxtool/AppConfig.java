@@ -8,6 +8,12 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig
 {
 	@Bean
+	public CommandRegistry commandRegistry()
+	{
+		return new CommandRegistry();
+	}
+
+	@Bean
 	public CommandLineRunner commandLineRunner()
 	{
 		return new App();

@@ -1,10 +1,15 @@
 package com.github.cbuschka.jmxtool;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Map;
 import java.util.Properties;
 
 public class CommandLineParser
 {
+	@Autowired
+	private CommandRegistry commandRegistry;
+
 	public CommandLine parse(String[] args, Properties props) throws InvalidCommandLine
 	{
 		CommandLine commandLine = new CommandLine();
@@ -83,6 +88,6 @@ public class CommandLineParser
 
 	private boolean isCommand(String arg)
 	{
-		return !arg.startsWith("-");
+		return !arg.startsWith("-") && this.commandRegistry.isCommand(arg);
 	}
 }

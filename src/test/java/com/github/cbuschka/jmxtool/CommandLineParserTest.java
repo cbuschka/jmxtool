@@ -3,6 +3,10 @@ package com.github.cbuschka.jmxtool;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,9 +18,16 @@ import static org.junit.Assert.*;
 public class CommandLineParserTest
 {
 	@Rule
+	public MockitoRule mockitoRule = MockitoJUnit.rule();
+
+	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
-	private CommandLineParser commandLineParser = new CommandLineParser();
+	@Mock
+	private CommandRegistry commandRegistry;
+
+	@InjectMocks
+	private CommandLineParser commandLineParser;
 
 	private Properties props = new Properties();
 
