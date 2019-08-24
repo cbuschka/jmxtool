@@ -8,7 +8,7 @@ public class Main
 {
 	public static void main(String[] args) throws Exception
 	{
-		SpringApplication.run(new Class[]{
+		SpringApplication.run(new Class<?>[]{
 				AppConfig.class, VersionConfig.class
 		}, args);
 	}

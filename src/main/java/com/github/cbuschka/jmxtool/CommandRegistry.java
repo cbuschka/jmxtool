@@ -17,14 +17,20 @@ public class CommandRegistry
 	private HelpCommand helpCommand;
 	@Autowired
 	private VersionCommand versionCommand;
+	@Autowired
+	private GetAttributeCommand getAttributeCommand;
+	@Autowired
+	private ListMBeansCommand listMBeansCommand;
+	@Autowired
+	private ListAttributesCommand listAttributesCommand;
 
 	@PostConstruct
 	private void init()
 	{
 		commandMap.put("help", helpCommand);
-		commandMap.put("listMBeans", new ListMBeansCommand());
-		commandMap.put("listAttributes", new ListAttributesCommand());
-		commandMap.put("getAttribute", new GetAttributeCommand());
+		commandMap.put("listMBeans", listMBeansCommand);
+		commandMap.put("listAttributes", listAttributesCommand);
+		commandMap.put("getAttribute", getAttributeCommand);
 		commandMap.put("version", versionCommand);
 	}
 

@@ -8,6 +8,30 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig
 {
 	@Bean
+	public MBeanServerConnectionPool mBeanConnectionPool()
+	{
+		return new MBeanServerConnectionPool();
+	}
+
+	@Bean
+	public ListMBeansCommand listMBeansCommand()
+	{
+		return new ListMBeansCommand();
+	}
+
+	@Bean
+	public ListAttributesCommand listAttributesCommand()
+	{
+		return new ListAttributesCommand();
+	}
+
+	@Bean
+	public GetAttributeCommand getAttributeCommand()
+	{
+		return new GetAttributeCommand();
+	}
+
+	@Bean
 	public VersionCommand versionCommand()
 	{
 		return new VersionCommand();

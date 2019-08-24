@@ -1,15 +1,15 @@
 package com.github.cbuschka.jmxtool;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
-import javax.management.remote.JMXConnector;
-import javax.management.remote.JMXConnectorFactory;
-import javax.management.remote.JMXServiceURL;
-import java.util.HashMap;
-import java.util.Map;
 
 public class GetAttributeCommand implements Command
 {
+	@Autowired
+	private MBeanServerConnectionPool mBeanServerConnectionPool;
+
 	@Override
 	public String getDescription()
 	{
@@ -21,19 +21,11 @@ public class GetAttributeCommand implements Command
 		String serviceUrl = commandLine.getRequiredOpt("serviceUrl");
 		String objectName = commandLine.getRequiredOpt("objectName");
 		String attributeName = commandLine.getRequiredOpt("attributeName");
-
-		Map<String, Object> env = new HashMap<>();
 		String user = commandLine.getOpt("user");
 		String password = commandLine.getOpt("password");
-		if (user != null && password != null)
-		{
-			env.put(JMXConnector.CREDENTIALS, new String[]{user, password});
-		}
 
-		JMXServiceURL jmxServiceUrl = new JMXServiceURL(serviceUrl);
+		MBeanServerConnection jmxConn = mBeanServerConnectionPool.getConnection(serviceUrl, user, password);
 		ObjectName jmxObjectName = new ObjectName(objectName);
-		JMXConnector jmxConnector = JMXConnectorFactory.connect(jmxServiceUrl, env);
-		MBeanServerConnection jmxConn = jmxConnector.getMBeanServerConnection();
 		Object value = jmxConn.getAttribute(jmxObjectName, attributeName);
 		System.out.print(value);
 	}
