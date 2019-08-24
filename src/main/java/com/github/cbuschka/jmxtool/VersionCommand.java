@@ -15,6 +15,6 @@ public class VersionCommand implements Command
 
 	public void execute(CommandLine commandLine) throws Exception
 	{
-		System.out.println(String.format("Version %s, commitish %s.", versionConfig.getProjectVersion(), versionConfig.getCommitish()));
+		System.out.println(String.format("%s (%s)", versionConfig.getProjectVersion(), versionConfig.getCommitish()));
 	}
 }

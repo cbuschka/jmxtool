@@ -8,12 +8,6 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig
 {
 	@Bean
-	public VersionConfig versionConfig()
-	{
-		return new VersionConfig();
-	}
-
-	@Bean
 	public VersionCommand versionCommand()
 	{
 		return new VersionCommand();
