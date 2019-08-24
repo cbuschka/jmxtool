@@ -37,4 +37,14 @@ public class CommandLine
 	{
 		this.command = command;
 	}
+
+	public String getOpt(String key)
+	{
+		return getOpt(key, null);
+	}
+
+	public String getOpt(String key, String defaultValue)
+	{
+		return (String) this.opts.getOrDefault(key, defaultValue);
+	}
 }
