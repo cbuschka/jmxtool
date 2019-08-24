@@ -23,6 +23,7 @@ public class TailCommand implements Command
 	@Override
 	public void execute(CommandLine commandLine) throws Exception
 	{
+		OutputWriter outputWriter = new DefaultOutputWriter();
 		String serviceUrl = commandLine.getRequiredOpt("serviceUrl");
 		String user = commandLine.getOpt("user");
 		String password = commandLine.getOpt("password");
@@ -32,17 +33,16 @@ public class TailCommand implements Command
 		List<AttributeLocator> attributeLocators = parseAttributeLocators(attributesOpt);
 
 		MBeanServerConnection conn = mBeanServerConnectionPool.getConnection(serviceUrl, user, password);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD'T'HH:mm:ss.SSS'Z'02:00");
 		while (true)
 		{
-			System.out.print(String.format("%s", dateFormat.format(new Date())));
+			outputWriter.startRow(new Date());
 			for (AttributeLocator attributeLocator : attributeLocators)
 			{
 				Object value = conn.getAttribute(attributeLocator.getObjectName(), attributeLocator.getAttributeName());
-				System.out.print(String.format(" %s:%s=%s", attributeLocator.getObjectName(), attributeLocator.getAttributeName(), value));
+				outputWriter.attribute(attributeLocator.getObjectName().toString(), attributeLocator.getAttributeName(), value);
 			}
 
-			System.out.println();
+			outputWriter.endRow();
 			Thread.sleep(sleepSeconds * 1000);
 		}
 	}

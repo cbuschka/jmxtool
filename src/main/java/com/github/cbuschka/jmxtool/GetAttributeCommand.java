@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
+import java.util.Date;
 
 public class GetAttributeCommand implements Command
 {
@@ -18,6 +19,7 @@ public class GetAttributeCommand implements Command
 
 	public void execute(CommandLine commandLine) throws Exception
 	{
+		OutputWriter outputWriter = new DefaultOutputWriter();
 		String serviceUrl = commandLine.getRequiredOpt("serviceUrl");
 		String objectName = commandLine.getRequiredOpt("objectName");
 		String attributeName = commandLine.getRequiredOpt("attributeName");
@@ -27,6 +29,8 @@ public class GetAttributeCommand implements Command
 		MBeanServerConnection jmxConn = mBeanServerConnectionPool.getConnection(serviceUrl, user, password);
 		ObjectName jmxObjectName = new ObjectName(objectName);
 		Object value = jmxConn.getAttribute(jmxObjectName, attributeName);
-		System.out.print(String.format("%s:%s=%s", objectName, attributeName, value));
+		outputWriter.startRow(new Date());
+		outputWriter.attribute(objectName, attributeName, value);
+		outputWriter.endRow();
 	}
 }
