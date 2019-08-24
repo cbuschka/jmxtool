@@ -9,6 +9,12 @@ import java.util.Set;
 
 public class ListMBeansCommand implements Command
 {
+	@Override
+	public String getDescription()
+	{
+		return "List MBeans.";
+	}
+
 	public void execute(CommandLine commandLine) throws Exception
 	{
 		String serviceUrl = commandLine.getRequiredOpt("serviceUrl");

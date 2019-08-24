@@ -1,5 +1,7 @@
 package com.github.cbuschka.jmxtool;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -11,9 +13,13 @@ public class CommandRegistry
 {
 	private Map<String, Command> commandMap = new LinkedHashMap<>();
 
+	@Autowired
+	private HelpCommand helpCommand;
+
 	@PostConstruct
 	private void init()
 	{
+		commandMap.put("help", helpCommand);
 		commandMap.put("listMBeans", new ListMBeansCommand());
 		commandMap.put("getAttribute", new GetAttributeCommand());
 	}

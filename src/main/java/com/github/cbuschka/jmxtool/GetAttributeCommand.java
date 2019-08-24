@@ -8,6 +8,12 @@ import javax.management.remote.JMXServiceURL;
 
 public class GetAttributeCommand implements Command
 {
+	@Override
+	public String getDescription()
+	{
+		return "Get MBean attribute.";
+	}
+
 	public void execute(CommandLine commandLine) throws Exception
 	{
 		String serviceUrl = commandLine.getRequiredOpt("serviceUrl");

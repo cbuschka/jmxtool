@@ -12,7 +12,7 @@ public class CommandLine
 	{
 		return opts;
 	}
-	
+
 	public String getCommand()
 	{
 		return this.command;
@@ -31,5 +31,10 @@ public class CommandLine
 		{
 			throw new IllegalArgumentException("Option --" + key + " is required.");
 		}
+	}
+
+	public void setCommand(String command)
+	{
+		this.command = command;
 	}
 }

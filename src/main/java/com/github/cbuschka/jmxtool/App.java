@@ -19,20 +19,14 @@ public class App implements CommandLineRunner
 
 	public void run(String... args) throws Exception
 	{
-		if (args.length == 0)
-		{
-			System.err.println("java -jar jmxtool.jar " + commandRegistry
-					.getCommandNames()
-					.stream()
-					.collect(Collectors.joining("|")));
-			System.exit(1);
-		}
-
 		try
 		{
 			Properties props = this.propertiesLoader.load();
 
 			CommandLine commandLine = commandLineParser.parse(args, props);
+			if( commandLine.getCommand() == null ) {
+				commandLine.setCommand("help");
+			}
 
 			String commandName = commandLine.getCommand();
 			Command command = commandRegistry.getCommand(commandName);

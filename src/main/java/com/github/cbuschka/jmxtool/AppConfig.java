@@ -8,6 +8,11 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig
 {
 	@Bean
+	public HelpCommand helpCommand() {
+		return new HelpCommand();
+	}
+
+	@Bean
 	public CommandRegistry commandRegistry()
 	{
 		return new CommandRegistry();
