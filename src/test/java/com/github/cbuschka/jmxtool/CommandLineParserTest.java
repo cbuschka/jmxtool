@@ -6,14 +6,19 @@ import org.junit.rules.ExpectedException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class CommandLineTest
+public class CommandLineParserTest
 {
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
+
+	private CommandLineParser commandLineParser = new CommandLineParser();
+
+	private Properties props = new Properties();
 
 	private String[] args;
 
@@ -58,7 +63,7 @@ public class CommandLineTest
 
 	private void whenParsed() throws InvalidCommandLine
 	{
-		this.commandLine = CommandLine.parse(args);
+		this.commandLine = commandLineParser.parse(args, props);
 	}
 
 	private void givenArgs(String... args)

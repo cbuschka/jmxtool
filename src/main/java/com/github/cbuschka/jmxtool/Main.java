@@ -1,7 +1,13 @@
 package com.github.cbuschka.jmxtool;
 
+import java.util.Properties;
+
 public class Main
 {
+	private PropertiesLoader propertiesLoader = new PropertiesLoader();
+
+	private CommandLineParser commandLineParser = new CommandLineParser();
+
 	public static void main(String[] args) throws Exception
 	{
 		if (args.length == 0)
@@ -10,9 +16,16 @@ public class Main
 			System.exit(1);
 		}
 
+		new Main().run(args);
+	}
+
+	private void run(String[] args) throws Exception
+	{
 		try
 		{
-			CommandLine commandLine = CommandLine.parse(args);
+			Properties props = this.propertiesLoader.load();
+
+			CommandLine commandLine = commandLineParser.parse(args, props);
 
 			GetCommand getCommand = new GetCommand(commandLine);
 			getCommand.execute();
