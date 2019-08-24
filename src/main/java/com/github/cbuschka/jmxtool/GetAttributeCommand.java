@@ -21,7 +21,7 @@ public class GetAttributeCommand implements Command
 
 	public void execute(CommandLine commandLine) throws Exception
 	{
-		OutputWriter outputWriter = this.outputWriterProvider.getOutputWriter();
+		OutputWriter outputWriter = this.outputWriterProvider.getOutputWriter(commandLine.getOpt("outputFormat", "default"));
 		String serviceUrl = commandLine.getRequiredOpt("serviceUrl");
 		String objectName = commandLine.getRequiredOpt("objectName");
 		String attributeName = commandLine.getRequiredOpt("attributeName");

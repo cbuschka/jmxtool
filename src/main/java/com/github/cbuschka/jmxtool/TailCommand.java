@@ -25,7 +25,7 @@ public class TailCommand implements Command
 	@Override
 	public void execute(CommandLine commandLine) throws Exception
 	{
-		OutputWriter outputWriter = this.outputWriterProvider.getOutputWriter();
+		OutputWriter outputWriter = this.outputWriterProvider.getOutputWriter(commandLine.getOpt("outputFormat", "default"));
 		String serviceUrl = commandLine.getRequiredOpt("serviceUrl");
 		String user = commandLine.getOpt("user");
 		String password = commandLine.getOpt("password");

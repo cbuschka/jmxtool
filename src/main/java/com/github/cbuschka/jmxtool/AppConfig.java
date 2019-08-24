@@ -1,5 +1,6 @@
 package com.github.cbuschka.jmxtool;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,13 +9,27 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig
 {
 	@Bean
-	public DefaultOutputWriter defaultOutputWriter() {
+	public ObjectMapper objectMapper()
+	{
+		return new ObjectMapper();
+	}
+
+	@Bean
+	public DefaultOutputWriter defaultOutputWriter()
+	{
 		return new DefaultOutputWriter();
 	}
 
 	@Bean
-	public OutputWriterProvider outputWriterProvider() {
+	public OutputWriterProvider outputWriterProvider()
+	{
 		return new OutputWriterProvider();
+	}
+
+	@Bean
+	public JsonOutputWriter jsonOutputWriter()
+	{
+		return new JsonOutputWriter();
 	}
 
 	@Bean
