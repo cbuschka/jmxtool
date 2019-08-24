@@ -15,6 +15,8 @@ public class CommandRegistry
 
 	@Autowired
 	private HelpCommand helpCommand;
+	@Autowired
+	private VersionCommand versionCommand;
 
 	@PostConstruct
 	private void init()
@@ -22,6 +24,7 @@ public class CommandRegistry
 		commandMap.put("help", helpCommand);
 		commandMap.put("listMBeans", new ListMBeansCommand());
 		commandMap.put("getAttribute", new GetAttributeCommand());
+		commandMap.put("version", versionCommand);
 	}
 
 	public List<String> getCommandNames()

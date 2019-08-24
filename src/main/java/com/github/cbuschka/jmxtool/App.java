@@ -24,7 +24,8 @@ public class App implements CommandLineRunner
 			Properties props = this.propertiesLoader.load();
 
 			CommandLine commandLine = commandLineParser.parse(args, props);
-			if( commandLine.getCommand() == null ) {
+			if (commandLine.getCommand() == null)
+			{
 				commandLine.setCommand("help");
 			}
 
