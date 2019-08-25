@@ -30,11 +30,12 @@ public class TailCommand implements Command
 		String user = commandLine.getOpt("user");
 		String password = commandLine.getOpt("password");
 		int sleepSeconds = commandLine.getIntOpt("sleep", 1);
+		int count = commandLine.getIntOpt("count", -1);
 
 		String attributesOpt = commandLine.getRequiredOpt("attributes");
 		List<AttributeLocator> attributeLocators = parseAttributeLocators(attributesOpt);
 
-		while (true)
+		for (int i = 0; count == -1 || i < count; ++i)
 		{
 			MBeanServerConnection conn = mBeanServerConnectionPool.getConnection(serviceUrl, user, password);
 
