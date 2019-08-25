@@ -1,7 +1,9 @@
 package com.github.cbuschka.jmxtool;
 
-import javax.annotation.PreDestroy;
 import javax.management.MBeanServerConnection;
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectInstance;
+import javax.management.ObjectName;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
@@ -9,6 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class MBeanServerConnectionPool
 {
@@ -18,13 +21,26 @@ public class MBeanServerConnectionPool
 	{
 		Key connKey = new Key(serviceUrl, user, password);
 		MBeanServerConnection conn = this.connections.get(connKey);
-		if (conn == null)
+		if (conn == null || !isAlive(conn))
 		{
 			conn = open(serviceUrl, user, password);
 			this.connections.put(connKey, conn);
 		}
 
 		return conn;
+	}
+
+	private boolean isAlive(MBeanServerConnection conn)
+	{
+		try
+		{
+			Set<ObjectInstance> objectInstances = conn.queryMBeans(new ObjectName("*:*"), null);
+			return objectInstances != null;
+		}
+		catch (IOException | MalformedObjectNameException ex)
+		{
+			return false;
+		}
 	}
 
 	private MBeanServerConnection open(String serviceUrl, String user, String password) throws IOException

@@ -34,9 +34,10 @@ public class TailCommand implements Command
 		String attributesOpt = commandLine.getRequiredOpt("attributes");
 		List<AttributeLocator> attributeLocators = parseAttributeLocators(attributesOpt);
 
-		MBeanServerConnection conn = mBeanServerConnectionPool.getConnection(serviceUrl, user, password);
 		while (true)
 		{
+			MBeanServerConnection conn = mBeanServerConnectionPool.getConnection(serviceUrl, user, password);
+
 			outputWriter.startRow(new Date());
 			for (AttributeLocator attributeLocator : attributeLocators)
 			{
