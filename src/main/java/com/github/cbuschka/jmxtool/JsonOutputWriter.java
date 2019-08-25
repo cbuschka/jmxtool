@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class JsonOutputWriter implements OutputWriter
 {
-	private final SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD'T'HH:mm:ss.SSS'Z'02:00");
+	private final SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD'T'HH:mm:ss.SSS'Z'Z");
 
 	@Autowired
 	private ObjectMapper objectMapper;
