@@ -1,0 +1,1 @@
+# default env for jmxtool.sh, put custom env into ${HOME}/.jmxtool/env

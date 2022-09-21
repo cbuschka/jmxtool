@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.cbuschka.jmxtool</groupId>
     <artifactId>jmxtool</artifactId>
@@ -39,6 +40,96 @@
     </scm>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <skip>false</skip>
+                    <stripVersion>false</stripVersion>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>copy-main-lib-file</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.version}</version>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>${project.build.directory}/release-bundle/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-lib-files</id>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/release-bundle/lib</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                            <excludeScope>test</excludeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-scripts</id>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>
+                                        ${project.basedir}/src/main/bash/
+                                    </directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.directory}/release-bundle/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>create-release-bundle</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <finalName>bundle-${project.version}</finalName>
+                            <descriptors>
+                                <descriptor>${project.basedir}/src/main/assembly/release-bundle.xml
+                                </descriptor>
+                            </descriptors>
+                            <appendAssemblyId>false</appendAssemblyId>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -95,6 +186,9 @@
                                 <requireMavenVersion>
                                     <version>3.0</version>
                                 </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>[1.8.0-0,1.8.999-999]</version>
+                                </requireJavaVersion>
                             </rules>
                         </configuration>
                     </execution>
