@@ -1,5 +1,11 @@
 # jmxtool - Command line tool to easily access jmx information
 
+## Prerequisites
+
+* bash for installation and start script
+* curl for installation
+* Java 8 installed
+
 ## Installation
 
 ```bash
