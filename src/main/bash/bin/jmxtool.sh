@@ -5,7 +5,7 @@ if [ -s "${SCRIPT}" ]; then
   SCRIPT=$(readlink -f "$0")
 fi
 
-INSTALL_DIR=$(cd `dirname "$0"`/.. && pwd -P)
+INSTALL_DIR=$(cd `dirname "$SCRIPT"`/.. && pwd -P)
 
 LIB_DIR=${INSTALL_DIR}/lib/
 

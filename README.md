@@ -4,7 +4,7 @@
 
 ### Get an MBean attribute
 ```bash
-jmxtool getAttribute \
+jmxtool.sh getAttribute \
 	--user=me --password=secret \
 	--serviceUrl=service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi \
 	--objectName=Catalina:type=Manager,context=/,host=localhost \
@@ -13,7 +13,7 @@ jmxtool getAttribute \
 
 ### Get command list
 ```bash
-jmxtool help
+jmxtool.sh help
 ```
 
 ## Config, user/password, default values
