@@ -129,7 +129,7 @@
                         </goals>
                         <configuration>
                             <outputDirectory>${project.build.directory}</outputDirectory>
-                            <finalName>bundle-${project.version}</finalName>
+                            <finalName>jmxtool-bundle-${project.version}</finalName>
                             <descriptors>
                                 <descriptor>${project.basedir}/src/main/assembly/release-bundle.xml
                                 </descriptor>
