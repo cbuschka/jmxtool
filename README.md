@@ -1,5 +1,11 @@
 # jmxtool - Command line tool to easily access jmx information
 
+## Installation
+
+```bash
+curl -sL https://raw.githubusercontent.com/cbuschka/jmxtool/main/install.sh -o - | bash
+```
+
 ## Usage
 
 ### Get an MBean attribute
