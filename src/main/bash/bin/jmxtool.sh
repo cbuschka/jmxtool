@@ -1,5 +1,10 @@
 #!/bin/bash
 
+SCRIPT=$0
+if [ -s "${SCRIPT}" ]; then
+  SCRIPT=$(readlink -f "$0")
+fi
+
 INSTALL_DIR=$(cd `dirname "$0"`/.. && pwd -P)
 
 LIB_DIR=${INSTALL_DIR}/lib/
